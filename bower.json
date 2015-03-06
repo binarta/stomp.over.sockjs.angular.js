@@ -1,0 +1,18 @@
+{
+    "name": "binarta.stomp.over.sockjs.angular",
+    "main": "./src/stomp.over.sockjs.js",
+    "dependencies": {
+        "angular": "1.2.5",
+        "binarta.config.angular":"0.0.*"
+    },
+    "devDependencies": {
+        "angular-mocks": "1.2.5",
+        "thk-config-mock": "0.0.*"
+    },
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test"
+    ]
+}

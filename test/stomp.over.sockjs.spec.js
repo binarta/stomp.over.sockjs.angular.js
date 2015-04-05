@@ -27,6 +27,10 @@ describe('stomp.over.sockjs.js', function () {
             expect(_stomp.socket).toEqual(_sock);
         });
 
+        it('stomp initialized debugging disabled', function () {
+            expect(_stomp.isDebugDisabled()).toEqual(true);
+        });
+
         describe('when connection pending and sending a message', function () {
             var promise;
 
@@ -131,16 +135,7 @@ function SockJS(url, ignored, args) {
 Stomp = {
     over: function (socket) {
         var topics = {};
-        _stomp = {
-            socket: socket,
-            messages: [],
-            to: function (topic, body) {
-                topics[topic].forEach(function (it) {
-                    it({body: body})
-                });
-            }
-        };
-        return {
+        var client = {
             connect: function (headers, onopen, onerror) {
                 _stomp.onopen = onopen;
                 _stomp.onerror = onerror;
@@ -157,6 +152,19 @@ Stomp = {
                 it();
             }
         };
+        _stomp = {
+            socket: socket,
+            messages: [],
+            to: function (topic, body) {
+                topics[topic].forEach(function (it) {
+                    it({body: body})
+                });
+            },
+            isDebugDisabled: function () {
+                return !client.debug;
+            }
+        };
+        return client;
     }
 };
 

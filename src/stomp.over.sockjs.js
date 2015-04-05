@@ -24,6 +24,7 @@
 
             sock = SockJS(config.baseUri + 'stomp');
             stomp = Stomp.over(sock);
+            stomp.debug = undefined;
 
             sock.onclose = function() {
                 if (opened) reset();
